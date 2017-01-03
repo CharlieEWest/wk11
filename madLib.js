@@ -1,4 +1,4 @@
-var inquirer = require("inquirer");
+ var inquirer = require("inquirer");
 
 function MadLib(nouns,adjectives,verbs){
 	this.nouns = nouns;
@@ -12,19 +12,17 @@ var adjectives = [];
 var verbs = [];
 var loop = 0;
 
-var getwords = function(loop){
-	console.log(loop);
-	console.log(adjectives);
-	if(loop < 2){
-		inquirer.prompt({
+var getWords = function(loop){
+	if(loop < 2){ 
+		inquirer.prompt({ 
 			name:"noun",
 			message:"Enter a noun: "
-		}).then(function(answers){ 
-		nouns.push(answers.noun)	
-		loop++;
-		getwords(loop);
+		}).then(function(answer){ 
+			nouns.push(answer.noun);
+			loop++;
+			getWords(loop);
 		})
-	}
+	 }
 	if(loop >= 2 && loop < 3){
 		inquirer.prompt({
 			name:"adjective",
@@ -32,18 +30,33 @@ var getwords = function(loop){
 		}).then(function(answers){
 			adjectives.push(answers.adjective);
 			loop++;
-			getwords(loop);
+			getWords(loop);
 		})
 	}
-	if(loop >= 2 && loop < 3){
+	if(loop >= 3  && loop < 4){
 		inquirer.prompt({
 			name:"verb",
 			message:"Enter an verb: "
 		}).then(function(answers){
-			adjectives.push(answers.verb);
-			var MadLib = new MadLib(noun,adjectives,verbs);
-			console.log(madlib);
+			verb.push(answers.verb);
+			var madLib = new MadLib(noun,adjectives,verbs);
+			constructStory(madLib);
 		})
 	}
 }
-getwords(loop);
+
+	 var constructStory = function(completeObject){
+   		for(var i=0;i<2;i++){
+ 		completeObject.story = completeObject.story.replace("[noun]",completeObject.nouns[i]);
+ 	}
+ 	 	for(var i=0;i<1;i++){
+   		completeObject.story = completeObject.story.replace("[adjective]",completeObject.adjectives[i]);
+    	}
+    	for(var i=0;i<1;i++){
+   		completeObject.story = completeObject.story.replace("[verb]",completeObject.verbs[i]);
+    		}
+    	console.loop(completeObject.story);
+    }	
+
+ getWords(loop);
+

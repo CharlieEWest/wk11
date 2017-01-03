@@ -1,4 +1,4 @@
-// Lesson 11.1 Programming Loop
+ // Lesson 11.1 Programming Loop
 
 var inquirer = require('inquirer');
 
